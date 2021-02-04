@@ -49,7 +49,7 @@ exports.getUserWithEmail = getUserWithEmail;
 const getUserWithId = function(id) {
   const queryString = `
   SELECT * FROM users
-  WHERE user.id = $1
+  WHERE id = $1
   `;
   return pool.query(queryString, [id])
     .then(res => {
@@ -95,7 +95,7 @@ exports.addUser = addUser;
  */
 const getAllReservations = function(guest_id, limit = 10) {
   const queryString = `
- }		   SELECT properties.*, reservations.*, avg(rating) as average_rating
+    SELECT properties.*, reservations.*, avg(rating) as average_rating
   FROM reservations
   JOIN properties ON reservations.property_id = properties.id
   JOIN property_reviews ON properties.id = property_reviews.property_id 
@@ -124,7 +124,7 @@ exports.getAllReservations = getAllReservations;
  * @param {*} limit The number of results to return.
  * @return {Promise<[{}]>}  A promise to the properties.
  */
-const getAllProperties = function(options, limit) {
+const getAllProperties = function(options, limit = 10) {
   // 1 Setup an array to hold any parameters that may be available for the query
   const queryParams = [];
   
@@ -138,7 +138,7 @@ const getAllProperties = function(options, limit) {
 
   if (options.city) {
     queryParams.push(`%${options.city}%`);
-    queryString += `WHERE city LIKE $${queryParams.length}`;
+    queryString += `WHERE city LIKE $${queryParams.length} `;
   }
 
   if (options.owner_id) {
