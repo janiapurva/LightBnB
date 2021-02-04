@@ -125,7 +125,7 @@ exports.getAllReservations = getAllReservations;
  * @return {Promise<[{}]>}  A promise to the properties.
  */
 const getAllProperties = function(options, limit = 10) {
-  // 1 Setup an array to hold any parameters that may be available for the query
+  // 1 Setup an array for hold property
   const queryParams = [];
   
   // 2 Start the query with all information that comes before the WHERE clause.
