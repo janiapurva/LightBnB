@@ -59,7 +59,6 @@ const getUserWithId = function(id) {
         return null;
       }
     });
-
 };
 exports.getUserWithId = getUserWithId;
 
@@ -183,7 +182,6 @@ const getAllProperties = function(options, limit = 10) {
   return pool.query(queryString, queryParams)
     .then(res => res.rows);
 
-    
 };
 exports.getAllProperties = getAllProperties;
 
